@@ -1,6 +1,7 @@
 <template>
   <Layout>
     <p>money</p>
+    <p>money12</p>
   </Layout>
 </template>
 

@@ -3,22 +3,20 @@
     <hr />
     <div>
       <router-link to="/money">
-        <svg class="icon">
-          <use xlink:href="#moneybag" />
-        </svg>
-        记账
+        <Icons name="moneybag" />记账
       </router-link>|
-      <router-link to="/labels">labels</router-link>|
-      <router-link to="/statistics">statistics</router-link>
+      <router-link to="/labels">
+        <Icons name="label" />标签
+      </router-link>|
+      <router-link to="/statistics">
+        <Icons name="chartbar" />统计
+      </router-link>
     </div>
   </div>
 </template>
 
 
-<script>
-import x from "@/assets/icons/moneybag.svg";
-console.log(x);
-
+<script lang="ts">
 export default {};
 </script>
 
