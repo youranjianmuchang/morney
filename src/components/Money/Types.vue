@@ -9,10 +9,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Types extends Vue {
+  @Prop(Number) xxx: number | undefined;
+  // Prop 告诉 Vue, xxx不是data是prop
+  // Number告诉Vue，xxx运行时是个Number
+  // 属性名
   type = "-";
   updateType(type: string) {
     if (type !== "-" && type !== "+") {
@@ -20,22 +24,10 @@ export default class Types extends Vue {
     }
     this.type = type;
   }
+  mounted() {
+    console.log(this.xxx);
+  }
 }
-// export default {
-//   data() {
-//     return {
-//       type: "-"
-//     };
-//   },
-//   methods: {
-// updateType(type) {
-//   if (type !== "-" && type !== "+") {
-//     throw new Error("type is unknow");
-//   }
-//   this.type = type;
-// }
-//   }
-// };
 </script>
 
 <style lang="scss" scoped>
