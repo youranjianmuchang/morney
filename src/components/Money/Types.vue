@@ -14,15 +14,12 @@ import { Component, Prop } from "vue-property-decorator";
 @Component
 export default class Types extends Vue {
   @Prop(Number) xxx: number | undefined;
+  @Prop(String) type: string | undefined;
   // Prop 告诉 Vue, xxx不是data是prop
   // Number告诉Vue，xxx运行时是个Number
   // 属性名
-  type = "-";
   updateType(type: string) {
-    if (type !== "-" && type !== "+") {
-      throw new Error("type is unknow");
-    }
-    this.type = type;
+    this.$emit("update:type", type);
   }
   mounted() {
     console.log(this.xxx);
