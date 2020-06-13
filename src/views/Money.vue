@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="money">
     <NumberPad :initOutput.sync="record.amount" @submit="saveRecord" />
-    <Notes :notes.sync="record.notes" />
+    <Notes filed-name="备注" placeholderText="在这里输入备注" :notes.sync="record.notes" />
     <Types :xxx="123" :type.sync="record.type" />
     <Tags :data-source.sync="tags" :currentTags.sync="record.currentTags" />
   </Layout>
