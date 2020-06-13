@@ -1,15 +1,20 @@
 const tagListKeyName = 'tagList';
+type Tag = {
+    id: string;
+    name: string;
+}
 type TagListModel = {
-    data: string[];
-    fetch: () => string[];
+    data: Tag[];
+    fetch: () => Tag[];
     create: (name: string) => 'success' | 'duplicated';
     save: () => void;
 }
 const tagListModel: TagListModel = {
     data: [],
     create(name: string) {
-        if (this.data.indexOf(name) >= 0) { return 'duplicated' }
-        this.data.push(name);
+        const names = this.data.map(tag => tag.name);
+        if (names.indexOf(name) >= 0) { return 'duplicated' }
+        this.data.push({ 'id': name, 'name': name });
         this.save();
         return 'success';
     },

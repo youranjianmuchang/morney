@@ -3,7 +3,7 @@
     <NumberPad :initOutput.sync="record.amount" @submit="saveRecord" />
     <Notes :notes.sync="record.notes" />
     <Types :xxx="123" :type.sync="record.type" />
-    <Tags :data-source.sync="record.tags" :currentTags.sync="record.currentTags" />
+    <Tags :data-source.sync="tags" :currentTags.sync="record.currentTags" />
   </Layout>
 </template>
 
