@@ -2,10 +2,10 @@
   <Layout class-prefix="money">
     <NumberPad :initOutput.sync="record.amount" @submit="saveRecord" />
     <div class="notes">
-      <FormItem filed-name="备注" placeholderText="在这里输入备注" :notes.sync="record.notes" />
+      <FormItem filed-name="备注" placeholderText="在这里输入备注" :value.sync="record.value" />
     </div>
     <Types :xxx="123" :type.sync="record.type" />
-    <Tags :data-source.sync="tags" :currentTags.sync="record.currentTags" />
+    <Tags :data-source="tagList" :currentTags.sync="record.currentTags" />
   </Layout>
 </template>
 
@@ -17,31 +17,31 @@ import FormItem from "@/components/Money/FormItem.vue";
 import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { recordListModel } from "@/models/recordListModel";
-import { tagListModel } from "@/models/tagListModel";
-
-const tagList = tagListModel.fetch();
 
 @Component({
   components: { NumberPad, FormItem, Types, Tags }
 })
 export default class Money extends Vue {
-  tags = tagList;
+  tagList = window.tagList;
   record: RecordItem = {
     currentTags: [],
     type: "-",
-    notes: "",
+    value: "",
     amount: 0
   };
-  recordList = recordListModel.fetch();
+  recordList = window.tagList;
   saveRecord() {
-    this.record.createAt = new Date();
-    const newRecord = recordListModel.clone(this.record);
-    this.recordList.push(newRecord);
+    recordListModel.create(this.record);
+  }
+
+  @Watch("tagList")
+  onTagListChange() {
+    window.saveTag();
   }
 
   @Watch("recordList")
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 }
 </script>
