@@ -5,7 +5,7 @@
       <FormItem filed-name="备注" placeholderText="在这里输入备注" :value.sync="record.value" />
     </div>
     <Types :xxx="123" :type.sync="record.type" />
-    <Tags :data-source="tagList" :currentTags.sync="record.currentTags" />
+    <Tags :data-source="tagList" :currentTags.sync="record.currentTags" :createTag="createTag" />
   </Layout>
 </template>
 
@@ -29,19 +29,9 @@ export default class Money extends Vue {
     value: "",
     amount: 0
   };
-  recordList = window.tagList;
+  recordList = recordListModel.fetch();
   saveRecord() {
     recordListModel.create(this.record);
-  }
-
-  @Watch("tagList")
-  onTagListChange() {
-    window.saveTag();
-  }
-
-  @Watch("recordList")
-  onRecordListChange() {
-    recordListModel.save();
   }
 }
 </script>

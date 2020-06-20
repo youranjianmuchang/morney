@@ -6,6 +6,7 @@ const recordListModel = {
         const newRecord: RecordItem = clone(record);
         newRecord.createAt = new Date();
         this.data.push(newRecord);
+        this.save();
     },
     fetch() {
         this.data = JSON.parse(

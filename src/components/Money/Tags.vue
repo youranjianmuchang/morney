@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="create">新增标签</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
       <li
@@ -32,7 +32,7 @@ export default class Tags extends Vue {
     }
     this.$emit("update:currentTags", this.selectedTags);
   }
-  create() {
+  createTag() {
     window.createTag();
   }
 }
