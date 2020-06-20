@@ -18,7 +18,6 @@ import Vue from "vue";
 import FormItem from "@/components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
 import { Component, Watch } from "vue-property-decorator";
-import store from "@/store/index2.ts";
 
 @Component({
   components: { FormItem, Button }
@@ -27,7 +26,7 @@ export default class EditLabel extends Vue {
   tag?: Tag = undefined;
   value = "";
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    this.tag = this.$store2.findTag(this.$route.params.id);
     if (this.tag) {
       this.value = this.tag.name;
     } else {
@@ -37,7 +36,7 @@ export default class EditLabel extends Vue {
   removeTag() {
     if (window.confirm("是否确认删除？")) {
       if (this.tag) {
-        if (store.removeTag(this.tag.id)) {
+        if (this.$store2.removeTag(this.tag.id)) {
           this.$router.back();
         }
       }
@@ -49,7 +48,7 @@ export default class EditLabel extends Vue {
   @Watch("value", { immediate: false })
   onValueChange() {
     if (this.tag) {
-      store.updateTag(this.tag.id, this.value);
+      this.$store2.updateTag(this.tag.id, this.value);
     }
   }
 }

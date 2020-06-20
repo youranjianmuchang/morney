@@ -15,6 +15,8 @@ const tagListStore = {
                 alert("添加成功");
                 return 'success';
             }
+        } else {
+            return alert("标签名不能为空");
         }
     },
     fecthTag() {
