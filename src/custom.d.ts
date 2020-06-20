@@ -1,6 +1,6 @@
 type RecordItem = {
     currentTags: string[];
-    value: string;
+    notes: string;
     type: string;
     amount: number;
     createAt?: Date; // createAt?: Date; 在属性后面添加问号，可以使得Record类型的变量定义时，不强制要有该属性
@@ -18,13 +18,4 @@ type TagListModel = {
     update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
     save: () => void;
     remove: (id: string) => boolean;
-}
-
-interface Window {
-    tagList: Tag[];
-    createTag: () => void;
-    findTag: (id: string) => Tag | undefined;
-    updateTag: TagListModel['update'];
-    removeTag: TagListModel['remove'];
-    saveTag: TagListModel['save'];
 }

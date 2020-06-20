@@ -17,6 +17,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
+import store from "@/store/index2.ts";
 
 @Component
 export default class Tags extends Vue {
@@ -33,7 +34,7 @@ export default class Tags extends Vue {
     this.$emit("update:currentTags", this.selectedTags);
   }
   createTag() {
-    window.createTag();
+    store.createTag();
   }
 }
 </script>
