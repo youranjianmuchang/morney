@@ -17,9 +17,11 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import TagHelper from "@/mixins/TagHelper";
 
 @Component
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   @Prop(Array) currentTags!: string[];
   selectedTags = this.currentTags;
   get tagList() {
@@ -36,9 +38,6 @@ export default class Tags extends Vue {
   }
   created() {
     this.$store.commit("fetchTag");
-  }
-  createTag() {
-    this.$store.commit("createTag");
   }
 }
 </script>

@@ -36,21 +36,14 @@ const store = new Vuex.Store({
     setCurrentTag(state, id: string) {
       state.currentTag = state.tagList.filter(tag => tag.id === id)[0]
     },
-    createTag(state) {
-      const name = prompt("请输入标签名称");
-      if (name) {
-        const names = state.tagList.map(tag => tag.name);
-        if (names.indexOf(name) >= 0) {
-          alert("标签已存在");
-          return 'duplicated'
-        } else {
-          state.tagList.push({ 'id': createId().toString(), 'name': name });
-          store.commit('saveTag');
-          alert("添加成功");
-          return 'success';
-        }
+    createTag(state, name) {
+      const names = state.tagList.map(tag => tag.name);
+      if (names.indexOf(name) >= 0) {
+        alert("标签已存在");
       } else {
-        return alert("标签名不能为空");
+        state.tagList.push({ 'id': createId().toString(), 'name': name });
+        store.commit('saveTag');
+        alert("添加成功");
       }
     },
     fetchTag(state) {
