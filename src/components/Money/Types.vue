@@ -1,8 +1,14 @@
 <template>
   <div>
     <ul class="types">
-      <li :class="type === '-' && 'selected'" @click="updateType('-')">支出</li>
-      <li :class="type === '+' && 'selected'" @click="updateType('+')">收入</li>
+      <li
+        :class="{[classPrefix+'-item']:classPrefix,'selected':type === '-'}"
+        @click="updateType('-')"
+      >支出</li>
+      <li
+        :class="{[classPrefix+'-item']:classPrefix,'selected':type === '+'}"
+        @click="updateType('+')"
+      >收入</li>
     </ul>
   </div>
 </template>
@@ -13,8 +19,9 @@ import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Types extends Vue {
-  @Prop(Number) xxx: number | undefined;
+  @Prop(Number) xxx?: number | undefined;
   @Prop(String) type: string | undefined;
+  @Prop(String) classPrefix?: string;
   // Prop 告诉 Vue, xxx不是data是prop
   // Number告诉Vue，xxx运行时是个Number
   // 属性名
