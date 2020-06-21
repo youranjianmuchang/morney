@@ -5,7 +5,12 @@
       <span class="nav-title">编辑标签</span>
     </div>
     <div class="formItem-wrapper">
-      <FormItem filed-name="标签名" placeholderText="输入新的标签名" :value.sync="value" />
+      <FormItem
+        filed-name="标签名"
+        @update:value="updateTag"
+        :value="currentTag.name"
+        placeholderText="输入新的标签名"
+      />
     </div>
     <div class="button-wrapper">
       <Button @click.native="removeTag">删除标签</Button>
@@ -23,33 +28,33 @@ import { Component, Watch } from "vue-property-decorator";
   components: { FormItem, Button }
 })
 export default class EditLabel extends Vue {
-  tag?: Tag = undefined;
   value = "";
+  get currentTag() {
+    return this.$store.state.currentTag;
+  }
   created() {
-    this.tag = this.$store2.findTag(this.$route.params.id);
-    if (this.tag) {
-      this.value = this.tag.name;
-    } else {
+    this.$store.commit("setCurrentTag", this.$route.params.id);
+    if (!this.currentTag) {
       this.$router.replace("/404");
     }
   }
   removeTag() {
     if (window.confirm("是否确认删除？")) {
-      if (this.tag) {
-        if (this.$store2.removeTag(this.tag.id)) {
-          this.$router.back();
-        }
+      if (this.currentTag) {
+        this.$store.commit("removeTag", this.currentTag.id);
       }
+    }
+  }
+  updateTag(name: string) {
+    if (this.currentTag) {
+      this.$store.commit("updateTag", {
+        id: this.currentTag.id,
+        name: name
+      });
     }
   }
   goBack() {
     this.$router.back();
-  }
-  @Watch("value", { immediate: false })
-  onValueChange() {
-    if (this.tag) {
-      this.$store2.updateTag(this.tag.id, this.value);
-    }
   }
 }
 </script>

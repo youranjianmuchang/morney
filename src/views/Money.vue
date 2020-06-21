@@ -27,9 +27,14 @@ export default class Money extends Vue {
     notes: "",
     amount: 0
   };
-  recordList = this.$store2.recordList;
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+  created() {
+    this.$store.commit("fetchRecord");
+  }
   saveRecord() {
-    this.$store2.createRecord(this.record);
+    this.$store.commit("createRecord", this.record);
   }
 }
 </script>

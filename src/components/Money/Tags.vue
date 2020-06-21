@@ -18,16 +18,13 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-@Component({
-  computed: {
-    tagList() {
-      return this.$store2.tagList;
-    }
-  }
-})
+@Component
 export default class Tags extends Vue {
   @Prop(Array) currentTags!: string[];
   selectedTags = this.currentTags;
+  get tagList() {
+    return this.$store.state.tagList;
+  }
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -37,8 +34,11 @@ export default class Tags extends Vue {
     }
     this.$emit("update:currentTags", this.selectedTags);
   }
+  created() {
+    this.$store.commit("fetchTag");
+  }
   createTag() {
-    this.$store2.createTag();
+    this.$store.commit("createTag");
   }
 }
 </script>

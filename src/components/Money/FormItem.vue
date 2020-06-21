@@ -2,25 +2,28 @@
   <div>
     <label class="formItem">
       <span class="name">{{filedName}}</span>
-      <input type="text" :placeholder="placeholderText" v-model="currentValue" />
+      <input
+        type="text"
+        @input="onValueChanged($event.target.value)"
+        :placeholder="placeholderText"
+        :value="value"
+      />
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class FormItem extends Vue {
   @Prop(String) value: string | undefined;
   @Prop({ required: true }) filedName!: string;
   @Prop() placeholderText!: string;
-  currentValue = this.value;
 
-  @Watch("currentValue")
-  onCurrentValueChange(value: string) {
-    this.$emit("update:value", value);
+  onValueChanged(name: string) {
+    this.$emit("update:value", name);
   }
 }
 </script>

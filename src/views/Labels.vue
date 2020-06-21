@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="tags">
-      <router-link class="item" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
+      <router-link class="item" v-for="tag in tagList" :key="tag.id" :to="`/labels/edit/${tag.id}`">
         <span>{{tag.name}}</span>
         <Icons name="right" />
       </router-link>
@@ -20,9 +20,14 @@ import Button from "@/components/Button.vue";
   components: { Button }
 })
 export default class Labels extends Vue {
-  tags = this.$store2.tagList;
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+  created() {
+    this.$store.commit("fetchTag");
+  }
   createTag() {
-    this.$store2.createTag();
+    this.$store.commit("createTag");
   }
 }
 </script>

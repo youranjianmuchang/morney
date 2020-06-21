@@ -19,9 +19,9 @@ const tagListStore = {
             return alert("标签名不能为空");
         }
     },
-    fecthTag() {
+    fetchTag() {
         this.tagList = JSON.parse(
-            window.localStorage.getItem(tagListKeyName) || "[]"
+            window.localStorage.getItem('tagList') || "[]"
         );
         return this.tagList;
     },
@@ -61,8 +61,8 @@ const tagListStore = {
         return true;
     },
     saveTag() {
-        window.localStorage.setItem(tagListKeyName, JSON.stringify(this.tagList));
+        window.localStorage.setItem('tagList', JSON.stringify(this.tagList));
     }
 }
-tagListStore.fecthTag();
+tagListStore.fetchTag();
 export default tagListStore;
