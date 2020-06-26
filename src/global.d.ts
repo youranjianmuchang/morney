@@ -3,7 +3,7 @@ type RecordItem = {
     notes: string;
     type: string;
     amount: number;
-    createAt?: Date; // createAt?: Date; 在属性后面添加问号，可以使得Record类型的变量定义时，不强制要有该属性
+    createAt?: string; // createAt?: Date; 在属性后面添加问号，可以使得Record类型的变量定义时，不强制要有该属性
 };
 
 type Tag = {
@@ -18,4 +18,10 @@ type TagListModel = {
     update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
     save: () => void;
     remove: (id: string) => boolean;
+}
+
+type RootState = {
+    recordList: RecordItem[];
+    tagList: Tag[];
+    currentTag?: Tag;
 }

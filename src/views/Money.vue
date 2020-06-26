@@ -4,7 +4,7 @@
     <div class="notes">
       <FormItem filed-name="备注" placeholderText="在这里输入备注" :value.sync="record.notes" />
     </div>
-    <Types :xxx="123" :type.sync="record.type" />
+    <Tabs :value.sync="record.type" :data-source="tabItemArr" />
     <Tags :currentTags.sync="record.currentTags" />
   </Layout>
 </template>
@@ -14,11 +14,11 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import FormItem from "@/components/Money/FormItem.vue";
-import Types from "@/components/Money/Types.vue";
 import Tags from "@/components/Money/Tags.vue";
+import Tabs from "@/components/Tabs.vue";
 
 @Component({
-  components: { NumberPad, FormItem, Types, Tags }
+  components: { NumberPad, FormItem, Tags, Tabs }
 })
 export default class Money extends Vue {
   record: RecordItem = {
@@ -30,6 +30,10 @@ export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
+  tabItemArr = [
+    { text: "支出", value: "-" },
+    { text: "收入", value: "+" }
+  ];
   created() {
     this.$store.commit("fetchRecord");
   }
@@ -38,15 +42,15 @@ export default class Money extends Vue {
   }
 }
 </script>
-<style lang="scss">
-.money-content {
-  display: flex;
-  flex-direction: column-reverse;
+<style scoped lang="scss">
+::v-deep {
+  .money-content {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .notes {
+    padding: 12px 0;
+  }
 }
-.notes {
-  padding: 12px 0;
-}
-</style>
-<style lang="scss" scoped>
 // @import "~@/assets/style/helper.scss";
 </style>

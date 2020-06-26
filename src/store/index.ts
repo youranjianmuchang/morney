@@ -5,23 +5,16 @@ import createId from '@/lib/idCreator'
 import router from '@/router'
 
 Vue.use(Vuex);//把store绑定到vue.prototype
-
-type stateType = {
-  recordList: RecordItem[];
-  tagList: Tag[];
-  currentTag?: Tag;
-}
-
 const store = new Vuex.Store({
   state: {
     recordList: [],
     tagList: [],
     currentTag: undefined
-  } as stateType,
+  } as RootState,
   mutations: {
     createRecord(state, record: RecordItem) {
       const newRecord: RecordItem = clone(record);
-      newRecord.createAt = new Date();
+      newRecord.createAt = new Date().toISOString();
       state.recordList.push(newRecord);
       store.commit('saveRecord');
     },
