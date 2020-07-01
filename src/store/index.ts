@@ -32,17 +32,22 @@ const store = new Vuex.Store({
     createTag(state, name) {
       const names = state.tagList.map(tag => tag.name);
       if (names.indexOf(name) >= 0) {
-        alert("标签已存在");
+        state.tagListError = new Error('标签已存在');
       } else {
         state.tagList.push({ 'id': createId().toString(), 'name': name });
         store.commit('saveTag');
-        alert("添加成功");
       }
     },
     fetchTag(state) {
       state.tagList = JSON.parse(
         window.localStorage.getItem('tagList') || "[]"
       );
+      if (state.tagList.length < 1) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
+      }
     },
     updateTag(state, payload: { id: string; name: string }) {
       const ids = state.tagList.map(tag => tag.id);

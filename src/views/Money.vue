@@ -16,6 +16,7 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import FormItem from "@/components/Money/FormItem.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Tabs from "@/components/Tabs.vue";
+import typeList from "@/constants/typeList.ts";
 
 @Component({
   components: { NumberPad, FormItem, Tags, Tabs }
@@ -30,15 +31,18 @@ export default class Money extends Vue {
   get recordList() {
     return this.$store.state.recordList;
   }
-  tabItemArr = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" }
-  ];
+  tabItemArr = typeList;
   created() {
     this.$store.commit("fetchRecord");
   }
   saveRecord() {
+    if (this.record.currentTags.length < 1) {
+      alert("请选择至少一个标签");
+      return;
+    }
     this.$store.commit("createRecord", this.record);
+    window.alert("添加成功");
+    window.location.reload();
   }
 }
 </script>
