@@ -41,8 +41,9 @@ export default class Money extends Vue {
       return;
     }
     this.$store.commit("createRecord", this.record);
-    window.alert("添加成功");
-    window.location.reload();
+    this.$message.success("添加成功", () => {
+      window.location.reload();
+    });
   }
 }
 </script>

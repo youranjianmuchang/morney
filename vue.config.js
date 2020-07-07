@@ -17,5 +17,21 @@ module.exports = {
       .tap(options => ({ ...options, plugins: [{ removeAttrs: { attrs: 'fill' } }] })).end()
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{ plainSprite: true }]);
     config.module.rule('svg').exclude.add(dir);
-  }
+  },
+  css: {
+    loaderOptions: {
+      less: {
+        lessOptions: {
+          modifyVars: {
+            'text-color': '#333',
+            'primary-color': '#333',
+            'link-color': 'inherit',
+            'font-size-base': '16px',
+            'body-background': '#f5f5f5'
+          },
+          javascriptEnabled: true,
+        },
+      },
+    },
+  },
 }
