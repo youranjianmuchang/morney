@@ -18,7 +18,7 @@ export default {
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
 
-body {
+html body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: $font-hei;

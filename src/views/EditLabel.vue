@@ -39,11 +39,17 @@ export default class EditLabel extends Vue {
     }
   }
   removeTag() {
-    if (window.confirm("是否确认删除？")) {
-      if (this.currentTag) {
-        this.$store.commit("removeTag", this.currentTag.id);
-      }
-    }
+    // const _this = this;
+    // _this.$confirm({
+    //   content: "是否确认删除标签？",
+    //   okText: "确认",
+    //   cancelText: "取消",
+    //   onOk() {
+    //     if (_this.currentTag) {
+    //       _this.$store.commit("removeTag", _this.currentTag.id);
+    //     }
+    //   }
+    // });
   }
   updateTag(name: string) {
     if (this.currentTag) {
@@ -64,23 +70,23 @@ export default class EditLabel extends Vue {
   background-color: #fff;
   position: relative;
   text-align: center;
-  padding: 12px 0;
+  padding: 0.23rem 0;
   font-size: 16px;
   .nav-left {
     position: absolute;
-    left: 12px;
+    left: 0.23rem;
     top: 50%;
     transform: translateY(-50%);
   }
 }
 .formItem-wrapper {
   background-color: #fff;
-  margin-top: 8px;
+  margin-top: 0.12rem;
   padding: 2px 0;
 }
 .button-wrapper {
   text-align: center;
-  padding: 16px;
-  margin-top: 44-16px;
+  padding: 0.29rem;
+  margin-top: 0.51rem;
 }
 </style>

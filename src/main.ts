@@ -15,10 +15,13 @@ Vue.config.productionTip = false
 const { Message, Modal } = Ant;
 
 Vue.prototype.$message = Message;
+Vue.prototype.$confirm = Modal.confirm;
+
 Vue.component('Nav', Nav);
 Vue.component('Layout', Layout);
 Vue.component('Icons', Icons);
 Vue.component(Modal.name, Modal);
+Vue.use(Modal);
 Message.config({
   duration: 2,
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="createTag">新增标签</button>
+      <button @click="isVisible=true">新增标签</button>
     </div>
     <ul class="current">
       <li
@@ -11,6 +11,7 @@
         @click="toggle(tag)"
       >{{tag.name}}</li>
     </ul>
+    <AddModal :isVisible.sync="isVisible" />
   </div>
 </template>
 
@@ -19,9 +20,12 @@ import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import TagHelper from "@/mixins/TagHelper";
-
-@Component
+import AddModal from "@/components/AddModal.vue";
+@Component({
+  components: { AddModal }
+})
 export default class Tags extends mixins(TagHelper) {
+  isVisible = false;
   @Prop(Array) currentTags!: string[];
   selectedTags = this.currentTags;
   get tagList() {
@@ -46,8 +50,8 @@ export default class Tags extends mixins(TagHelper) {
 @import "~@/assets/style/helper.scss";
 .tags {
   background-color: white;
-  font-size: 14px;
-  padding: 16px;
+  font-size: 0.22rem;
+  padding: 0.29rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
@@ -55,13 +59,13 @@ export default class Tags extends mixins(TagHelper) {
     display: flex;
     flex-wrap: wrap;
     > li {
-      padding: 0 16px;
+      padding: 0 0.29rem;
       background-color: #d9d9d9;
-      $h: 24px;
+      $h: 0.43rem;
       line-height: $h;
       height: $h;
       border-radius: $h/2;
-      margin-right: 12px;
+      margin-right: 0.22rem;
       &.selected {
         color: #fff;
         background-color: #ff9400;
@@ -69,7 +73,7 @@ export default class Tags extends mixins(TagHelper) {
     }
   }
   > .new {
-    padding-top: 16px;
+    padding-top: 0.29rem;
     button {
       background-color: transparent;
       border: 0;
@@ -77,6 +81,7 @@ export default class Tags extends mixins(TagHelper) {
       border-bottom: 1px solid;
       padding: 0 3px;
       cursor: pointer;
+      outline-color: transparent;
     }
   }
 }

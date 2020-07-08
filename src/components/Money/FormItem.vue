@@ -33,15 +33,15 @@ export default class FormItem extends Vue {
 .formItem {
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 0.29rem;
   > .name {
-    padding-right: 16px;
+    padding-right: 0.29rem;
   }
   > input {
     flex-grow: 1;
     background-color: transparent;
     border: 0;
-    padding: 8px 0;
+    padding: 0.13rem 0;
     outline: none;
   }
 }

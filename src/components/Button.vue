@@ -18,12 +18,12 @@ export default class Button extends Vue {}
   background-color: #767676;
   color: white;
   border: 0;
-  border-radius: 4px;
-  height: 40px;
-  padding: 0 16px;
+  border-radius: 0.1rem;
+  height: 0.73rem;
+  padding: 0 0.29rem;
   &-wrapper {
     text-align: center;
-    padding: 16px;
+    padding: 0.29rem;
   }
 }
 </style>

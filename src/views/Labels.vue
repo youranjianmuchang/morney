@@ -7,8 +7,9 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button class="createTag" @click.native="createTag">新建标签</Button>
+      <Button class="createTag" @click.native="isVisible=true">新建标签</Button>
     </div>
+    <AddModal :isVisible.sync="isVisible" />
   </Layout>
 </template>
 
@@ -18,10 +19,12 @@ import { Component } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 import { mixins } from "vue-class-component";
 import TagHelper from "@/mixins/TagHelper";
+import AddModal from "@/components/AddModal.vue";
 @Component({
-  components: { Button }
+  components: { Button, AddModal }
 })
 export default class Labels extends mixins(TagHelper) {
+  isVisible = false;
   get tagList() {
     return this.$store.state.tagList;
   }
@@ -34,33 +37,34 @@ export default class Labels extends mixins(TagHelper) {
 <style lang="scss" scoped>
 .tags {
   background-color: #fff;
-  padding-left: 16px;
+  padding-left: 0.29rem;
   font-size: 16px;
   > .item {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
-    min-height: 44px;
+    min-height: 0.8rem;
     align-items: center;
   }
   svg {
-    width: 18px;
-    height: 18px;
+    width: 0.35rem;
+    height: 0.35rem;
     color: #666;
-    margin-right: 16px;
+    margin-right: 0.29rem;
   }
 }
 .createTag {
   background-color: #767676;
   color: white;
   border: 0;
-  border-radius: 4px;
-  height: 40px;
-  padding: 0 16px;
+  border-radius: 0.1rem;
+  height: 0.73rem;
+  padding: 0 0.29rem;
+  outline-color: transparent;
   &-wrapper {
     text-align: center;
-    padding: 16px;
-    margin-top: 44-16px;
+    padding: 0.29rem;
+    margin-top: 0.51rem;
   }
 }
 </style>

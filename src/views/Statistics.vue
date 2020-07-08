@@ -113,7 +113,7 @@ export default class Statistics extends Vue {
   }
   %item {
     font-size: 16px;
-    padding: 10px 16px;
+    padding: 0.18rem 0.29rem;
   }
   .record-list {
     .record-list-title {
@@ -130,7 +130,7 @@ export default class Statistics extends Vue {
       @extend %item;
       .record-list-item-notes {
         margin-right: auto;
-        margin-left: 10px;
+        margin-left: 0.18rem;
       }
     }
   }

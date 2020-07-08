@@ -32,8 +32,8 @@ export default {};
     align-items: center;
     flex-direction: column;
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 0.58rem;
+      height: 0.58rem;
     }
   }
   > .item.selected {

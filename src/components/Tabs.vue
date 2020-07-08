@@ -1,5 +1,5 @@
 <template>
-  <ul :class="classPrefix+'-tab'" class="tabs">
+  <ul :class="classPrefix && classPrefix+'-tab'" class="tabs">
     <li
       @click="select(item)"
       :class="liClass(item)"
@@ -41,12 +41,12 @@ export default class Tabs extends Vue {
   display: flex;
   background-color: #c4c4c4;
   align-items: center;
-  font-size: 24px;
+  font-size: 0.43rem;
   &-item {
     text-align: center;
     flex: 1;
-    height: 64px;
-    line-height: 64px;
+    height: 1.15rem;
+    line-height: 1.15rem;
     position: relative;
     &.selected {
       &::after {

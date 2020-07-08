@@ -41,7 +41,7 @@ export default class Money extends Vue {
       return;
     }
     this.$store.commit("createRecord", this.record);
-    this.$message.success("添加成功", () => {
+    this.$message.success("添加成功", 1, () => {
       window.location.reload();
     });
   }
@@ -54,7 +54,7 @@ export default class Money extends Vue {
     flex-direction: column-reverse;
   }
   .notes {
-    padding: 12px 0;
+    padding: 0.2rem 0;
   }
 }
 // @import "~@/assets/style/helper.scss";
