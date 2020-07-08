@@ -39,17 +39,16 @@ export default class EditLabel extends Vue {
     }
   }
   removeTag() {
-    // const _this = this;
-    // _this.$confirm({
-    //   content: "是否确认删除标签？",
-    //   okText: "确认",
-    //   cancelText: "取消",
-    //   onOk() {
-    //     if (_this.currentTag) {
-    //       _this.$store.commit("removeTag", _this.currentTag.id);
-    //     }
-    //   }
-    // });
+    this.$confirm({
+      content: "是否确认删除标签？",
+      okText: "确认",
+      cancelText: "取消",
+      onOk: () => {
+        if (this.currentTag) {
+          this.$store.commit("removeTag", this.currentTag.id);
+        }
+      }
+    });
   }
   updateTag(name: string) {
     if (this.currentTag) {
