@@ -36,7 +36,7 @@ export default class AddModal extends mixins(TagHelper) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .tagName {
   border: 0;
   min-width: 60%;

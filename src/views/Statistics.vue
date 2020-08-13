@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Tabs class-prefix="statistics-type" :data-source="typeList" :value.sync="type" />
-    <ol class="record-list">
+    <ol class="record-list" v-if="viewType">
       <li v-for="(group,index) in groupList" :key="index">
         <h3 class="record-list-title">
           <span>{{beautyDate(group.title)}}</span>
@@ -16,6 +16,8 @@
         </ol>
       </li>
     </ol>
+    <VueEcharts style="margin-top: .1rem" :options="echartsList" v-else></VueEcharts>
+    <span class="viewButton" @click="viewType=!viewType">{{buttonText}}</span>
   </Layout>
 </template>
 
@@ -23,10 +25,10 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
-import intervalList from "@/constants/intervalList.ts";
 import typeList from "@/constants/typeList.ts";
 import dayjs from "dayjs";
 import clone from "@/lib/clone";
+import VueEcharts from "@/components/vue-echarts.vue";
 
 type Result = {
   title: string;
@@ -35,11 +37,12 @@ type Result = {
 }[];
 
 @Component({
-  components: { Tabs }
+  components: { Tabs, VueEcharts }
 })
 export default class Statistics extends Vue {
   type = "-";
   typeList = typeList;
+  viewType = true;
   tagString(tags: Tag[]) {
     if (tags.length === 0) return "无";
     return tags.map(tag => tag.name).join(",");
@@ -60,8 +63,54 @@ export default class Statistics extends Vue {
       return str;
     }
   }
+  get buttonText() {
+    return this.viewType === true ? "图表" : "列表";
+  }
   get recordList() {
     return (this.$store.state as RootState).recordList;
+  }
+  get echartsList() {
+    const { groupList } = this;
+    const newList = clone(groupList).sort(
+      (a, b) => dayjs(a.title).valueOf() - dayjs(b.title).valueOf()
+    );
+    const title = this.type === "-" ? "支出" : "收入";
+    const dateArr: string[] = [];
+    const priceArr: any[] = [];
+    newList.map(list => {
+      dateArr.push(list.title);
+      priceArr.push(list.total);
+    });
+    // 指定图表的配置项和数据
+    const option = {
+      title: {
+        text: title
+      },
+      tooltip: {},
+      legend: {
+        data: [title]
+      },
+      xAxis: {
+        data: dateArr
+      },
+      yAxis: {},
+      series: [
+        {
+          type: "line",
+          data: priceArr,
+          itemStyle: {
+            borderWidth: 10,
+            color: "#ff9400"
+          },
+          lineStyle: {
+            color: "#ff9400"
+          }
+        }
+      ],
+      backgroundColor: "#fff"
+    };
+
+    return option;
   }
   get groupList() {
     const { recordList } = this;
@@ -133,6 +182,20 @@ export default class Statistics extends Vue {
         margin-left: 0.18rem;
       }
     }
+  }
+  .viewButton {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 0.5rem;
+    border-radius: 50%;
+    background-color: #767676;
+    color: #fff;
+    font-size: 0.3rem;
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.8rem;
+    text-align: center;
+    line-height: 0.8rem;
   }
 }
 </style>
