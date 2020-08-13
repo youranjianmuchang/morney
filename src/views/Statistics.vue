@@ -17,7 +17,7 @@
       </li>
     </ol>
     <VueEcharts :options="echartsList" v-else></VueEcharts>
-    <span class="viewButton" @click="viewType=!viewType">{{buttonText}}</span>
+    <span v-if="recordList.length > 0" class="viewButton" @click="viewType=!viewType">{{buttonText}}</span>
   </Layout>
 </template>
 
@@ -200,7 +200,7 @@ export default class Statistics extends Vue {
     }
   }
   .viewButton {
-    position: fixed;
+    position: absolute;
     bottom: 1.5rem;
     right: 0.5rem;
     border-radius: 50%;
@@ -212,11 +212,6 @@ export default class Statistics extends Vue {
     height: 0.8rem;
     text-align: center;
     line-height: 0.8rem;
-  }
-  @media (min-width: 500px) {
-    .viewButton {
-      right: 5rem;
-    }
   }
 }
 </style>

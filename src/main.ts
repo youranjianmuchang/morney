@@ -34,8 +34,12 @@ new Vue({
   render: h => h(App)
 }).$mount('#app');
 
-if(document.documentElement.clientWidth > 500){
-    Message.info('请在手机中打开本页面，以获得更好的体验',5);
+if (document.documentElement.clientWidth > 500) {
+  if (!localStorage.getItem('isShow')) {
+    Message.info('请在手机中打开本页面，以获得更好的体验', 5);
+    localStorage.setItem('isShow', '1');
+  }
+
 }
 
 /* eslint-disable */
