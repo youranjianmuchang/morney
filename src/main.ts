@@ -34,6 +34,10 @@ new Vue({
   render: h => h(App)
 }).$mount('#app');
 
+if(document.documentElement.clientWidth > 500){
+    Message.info('请在手机中打开本页面，以获得更好的体验',5);
+}
+
 /* eslint-disable */
 (function (doc, win) {
   const docEl = doc.documentElement,

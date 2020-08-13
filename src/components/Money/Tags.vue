@@ -8,7 +8,7 @@
         v-for="tag in tagList"
         :key="tag.id"
         :class="{selected:selectedTags.indexOf(tag) >= 0}"
-        @click="toggle(tag)"
+        @click="toggle(tag.name)"
       >{{tag.name}}</li>
     </ul>
     <AddModal :isVisible.sync="isVisible" />

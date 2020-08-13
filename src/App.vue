@@ -27,4 +27,14 @@ html body {
   font-size: 16px;
   background-color: #f5f5f5;
 }
+
+@media (min-width: 500px) {
+  html {
+    font-size: 55.2px !important;
+    width: 414px !important;
+    margin: auto;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+}
 </style>
